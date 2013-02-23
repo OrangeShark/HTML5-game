@@ -5,15 +5,15 @@ function Atlas(url, atlasJSON) {
     this.image.src = url;
 
     var atlas = JSON.parse(atlasJSON);
-    for( frame in atlas.frames ) {
-        var sprite = atlas.frames[frame];
-        this.addSprite(sprite)
+    for( name in atlas.frames ) {
+        var sprite = atlas.frames[name];
+        this.addSprite(name, sprite)
 
     }
 
 }
 
-Atlas.prototype.addSprite = function(image) {
+Atlas.prototype.addSprite = function(name, image) {
     var cx,
         cy;
     if( image.trimmed ) {
@@ -24,9 +24,9 @@ Atlas.prototype.addSprite = function(image) {
         cy = -(image.h / 2);
     }
 
-    var sprite = new Sprite(image.name, this, image.frame.x, image.frame.y, image.frame.w, image.frame.h, cx, cy);
+    var sprite = new Sprite(name, this, image.frame.x, image.frame.y, image.frame.w, image.frame.h, cx, cy);
 
-    this.sprites[image.name] = sprite;
+    this.sprites[name] = sprite;
 
 }
 
