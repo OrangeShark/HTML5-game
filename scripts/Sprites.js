@@ -51,6 +51,6 @@ function Sprite(id, sheet, x, y, w, h, cx, cy) {
 
 Sprite.prototype.draw = function(ctx, posX, posY, settings) {
     
-    ctx.drawImage(this.sheet.img, this.x, this.y, this.w, this.h, posX + this.cx, posY + this.cy, this.w, this.h);
+    ctx.drawImage(this.sheet.image, this.x, this.y, this.w, this.h, posX + this.cx, posY + this.cy, this.w, this.h);
 
 }
