@@ -1,20 +1,30 @@
-function Atlas() {
+function Atlas(url, atlasJSON) {
     this.sprites = {};
+    this.url = url;
+    this.image = new Image();
+    this.image.src = url;
+
+    var atlas = JSON.parse(atlasJSON);
+    for( frame in atlas.frames ) {
+        var sprite = atlas.frames[frame];
+        this.addSprite(sprite)
+
+    }
 
 }
 
-Atlas.prototype.addSprite = function(image, sheet) {
+Atlas.prototype.addSprite = function(image) {
     var cx,
         cy;
     if( image.trimmed ) {
-        cx = image.spriteSourceSize.x - (image.sourceSize.w / 2);
-        cy = image.spriteSourceSize.y - (image.sourceSize.h / 2);
+        cx = -(image.spriteSourceSize.x - (image.sourceSize.w / 2));
+        cy = -(image.spriteSourceSize.y - (image.sourceSize.h / 2));
     } else {
-        cx = image.w / 2;
-        cy = image.h / 2;
+        cx = -(image.w / 2);
+        cy = -(image.h / 2);
     }
 
-    var sprite = new Sprite(image.name, sheet, image.frame.x, image.frame.y, image.frame.w, image.frame.h, cx, cy);
+    var sprite = new Sprite(image.name, this, image.frame.x, image.frame.y, image.frame.w, image.frame.h, cx, cy);
 
     this.sprites[image.name] = sprite;
 
@@ -40,5 +50,7 @@ function Sprite(id, sheet, x, y, w, h, cx, cy) {
 }
 
 Sprite.prototype.draw = function(ctx, posX, posY, settings) {
+    
+    ctx.drawImage(this.sheet.img, this.x, this.y, this.w, this.h, posX + this.cx, posY + this.cy, this.w, this.h);
 
 }
