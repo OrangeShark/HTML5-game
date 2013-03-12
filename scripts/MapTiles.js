@@ -2,8 +2,8 @@ function TiledMap(mapUrl) {
 
     this.currMapData = null;
     this.tilesets = [];
-    this.numXTiles: 100;
-    this.numYTiles: 100;
+    this.numXTiles = 100;
+    this.numYTiles = 100;
     this.tileSize = {
         x: 64,
         y: 64
@@ -60,7 +60,7 @@ function TiledMap(mapUrl) {
 
     xhrGet( mapUrl, function( data ) {
         parseMap(data.responseText);
-    }
+    });
 
 }
 
