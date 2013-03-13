@@ -87,7 +87,30 @@ TiledMap.prototype.getTilePacket = function(tileIndex) {
     pkt.py = lTileY * this.tileSize.y;
 
     return pkt;
-}
+};
+
+TiledMap.prototype.draw = function(ctx) {
+    if(!this.fullyLoaded) return;
+
+    for(var layerIdx = 0; layerIdx < this.currMapData.layers.length; layerIdx++) {
+        if(this.currMapData.layers[layerIdx].type != "tilelayer") continue;
+
+        var dat = this.currMapData.layers[layerIdx].data;
+
+        for(var tileIDX = 0; tileIDX < dat.length; tileIDX++) {
+            var tID = dat[tileIDX];
+            if(tID === 0) continue;
+
+            var tPKT = this.getTilePacket(tID);
+
+            var xpos = (tID % this.xNumTiles) * this.tileSize.x;
+            var ypos = Math.floor( tID / this.xNumTiles ) * this.tileSize.y;
+
+            ctx.drawImage(tPkt.img, tPKT.px, tPKT.py, this.tileSize.x, this.tileSize.y, xpos, ypos, this.tileSize.x, this.tileSize.y);
+
+        }
+    }
+};
 
 function Tile( firstgid, image, imageheight, imagewidth, name, numXTiles, numYTiles) {
     this.firstgid = firstgid;
