@@ -14,10 +14,13 @@
     
     <script type="text/javascript">
         var canvas = document.getElementById("gameCanvas");
+        canvas.setAttribute('width', '800');
+        canvas.setAttribute('height', '600');
         var ctx = canvas.getContext('2d');
+        
 
         var map = new TiledMap('imgs/Grass.json');
-    
+
     
     </script>
 

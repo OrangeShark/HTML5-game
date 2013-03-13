@@ -17,8 +17,8 @@ function TiledMap(mapUrl) {
 
     var self = this;
 
-    var parseMap = function(mapURL) {
-        self.currMapData = JSON.parse(mapJSON);
+    var parseMap = function(mapUrl) {
+        self.currMapData = JSON.parse(mapUrl);
 
         var map = self.currMapData;
 
@@ -43,7 +43,7 @@ function TiledMap(mapUrl) {
                 }
             };
 
-            img.src = tileset.image;
+            img.src = 'imgs/' + tileset.image;
 
             var tile = new Tile( 
                     tileset.firstgid,
@@ -58,8 +58,8 @@ function TiledMap(mapUrl) {
         }
     };
 
-    xhrGet( mapUrl, function( data ) {
-        parseMap(data.responseText);
+    xhrGet( mapUrl, function( ) {
+        parseMap(this.responseText);
     });
 
 }
@@ -103,10 +103,13 @@ TiledMap.prototype.draw = function(ctx) {
 
             var tPKT = this.getTilePacket(tID);
 
-            var xpos = (tID % this.xNumTiles) * this.tileSize.x;
-            var ypos = Math.floor( tID / this.xNumTiles ) * this.tileSize.y;
+            var worldX = (tileIDX % this.numXTiles) * this.tileSize.x;
+            var worldY = Math.floor( tileIDX / this.numXTiles ) * this.tileSize.y;
 
-            ctx.drawImage(tPkt.img, tPKT.px, tPKT.py, this.tileSize.x, this.tileSize.y, xpos, ypos, this.tileSize.x, this.tileSize.y);
+            ctx.drawImage(tPKT.img, tPKT.px, tPKT.py, 
+                    this.tileSize.x, this.tileSize.y, 
+                    worldX, worldY, 
+                    this.tileSize.x, this.tileSize.y);
 
         }
     }
