@@ -10,6 +10,7 @@
             </head>
     <body>
         <canvas id="gameCanvas"><canvas>
+        <button id="tileTest">Test Tiles</button>
     </body>
     
     <script type="text/javascript">
@@ -20,6 +21,10 @@
         
 
         var map = new TiledMap('imgs/Grass.json');
+
+        document.getElementById('tileTest').onclick = function() {
+            map.draw(ctx);
+        };
 
     
     </script>
