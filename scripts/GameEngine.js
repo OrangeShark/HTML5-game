@@ -1,29 +1,30 @@
-function GameEngine(inputEngine, factory) {
+function GameEngine(canvas, scene) {
 
-    this.inputEngine = inputEngine;
-    this.factory = factory;
-    this.entities = [];
+    this.currScene = scene;
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+
 
 }
 
-GameEngine.prototype.spawnEntity = function(typename) {
-    var ent = new this.factory[typename]();
+GameEngine.prototype.runGame() {
+    var frameId = 0;
+    var lastFrame = Date.now();
+    var game = this;
 
-    this.entities.push(ent);
+    function run() {
+        var thisFrame = Data.now();
 
-    return ent;
+        var elasped = thisFrame -lastFrame;
+
+        frameId = window.requestAnimationFrame(run);
+
+        game.currScene.update(elasped);
+        game.currScene.draw(game.ctx);
+
+        lastFrame = thisFrame;
+    }
+
+    run();
 };
 
-GameEngine.prototype.removeEntity = function(ent) {
-
-};
-
-GameEngine.prototype.update = function() {
-
-};
-
-GameEngine.prototype.draw = function(ctx) {
-
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-};
