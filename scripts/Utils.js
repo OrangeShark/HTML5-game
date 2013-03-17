@@ -5,3 +5,9 @@ function xhrGet(reqUri, callback) {
 
     xhr.send();
 }
+
+function inherit(sub, parent) {
+    sub.prototype = new parent();
+    sub.prototype.constructor = sub;
+    sub.prototype._super = parent.prototype;
+}

@@ -1,4 +1,4 @@
-function Entity() {
+function GameEntity() {
     this.pos = {
         x:0,
         y:0
@@ -16,12 +16,14 @@ function Entity() {
 
 }
 
-Entity.prototype.update = function() {
+GameEntity.prototype.update = function() {
 
 };
 
-Entity.prototype.draw = function() {
+GameEntity.prototype.draw = function(ctx) {
 
-    this.currSprite.draw();
+    if(this.currSprite) {
+        this.currSprite.draw(ctx, this.pos.x - this.size.x / 2, this.pos.y - this.size.y / 2);
+    }
 
 };
