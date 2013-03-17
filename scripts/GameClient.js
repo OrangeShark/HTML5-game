@@ -1,4 +1,4 @@
-var assets = ["img/grits_effects"];
+var assets;
 
 function setup() {
 

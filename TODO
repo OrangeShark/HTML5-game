@@ -1,0 +1,4 @@
+Create some sort of concept of levels/scenes
+Implement the game loop
+
+Scene will contain a draw and update, it should have the Map and Entities as well. Possibly create a level which will handle the Entities and Maps.
