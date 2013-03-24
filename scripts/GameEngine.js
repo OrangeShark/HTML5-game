@@ -19,6 +19,8 @@ GameEngine.prototype.runGame() {
 
         frameId = window.requestAnimationFrame(run);
 
+        game.ctx.clearRect( 0, 0, game.canvas.width, game.canvas.height);
+
         game.currScene.update(elasped);
         game.currScene.draw(game.ctx);
 
@@ -63,6 +65,7 @@ Level.prototype.update = function(elasped) {
 };
 
 Level.prototype.draw = function(ctx) {
+    this.map.draw(ctx);
 
 };
 

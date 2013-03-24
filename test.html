@@ -18,10 +18,13 @@
         var canvas = document.getElementById("gameCanvas");
         canvas.setAttribute('width', '800');
         canvas.setAttribute('height', '600');
-        var ctx = canvas.getContext('2d');
-        
 
-        var map = new TiledMap('imgs/Grass.json');
+        var viewRect = {x: 0, y: 0, h: canvas.height, w: canvas.width};
+
+        var input = new InputEngine(canvas);
+        var map = new TiledMap('imgs/Grass.json', viewRect);
+        var start = new Level(map, {}, input);
+        var game = new GameEngine(canvas, start);
 
         document.getElementById('tileTest').onclick = function() {
             map.draw(ctx);
