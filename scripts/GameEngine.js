@@ -7,13 +7,13 @@ function GameEngine(canvas, scene) {
 
 }
 
-GameEngine.prototype.runGame() {
+GameEngine.prototype.runGame = function() {
     var frameId = 0;
     var lastFrame = Date.now();
     var game = this;
 
     function run() {
-        var thisFrame = Data.now();
+        var thisFrame = Date.now();
 
         var elasped = thisFrame -lastFrame;
 
