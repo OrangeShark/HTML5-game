@@ -28,3 +28,42 @@ GameEngine.prototype.runGame() {
     run();
 };
 
+function Scene() {
+
+
+}
+
+Scene.prototype.update = function(elasped) {
+
+};
+
+Scene.prototype.draw = function(ctx) {
+
+};
+
+function Level(map, factory, input) {
+    this.map = map;
+    this.input = input;
+    this.factory = factory;
+    this.entities = [];
+}
+
+Level.prototype.spawnEntity = function(typeName) {
+    var ent = new this.factory[typeName]();
+    this.entities.push(ent);
+    return ent;
+};
+
+Level.prototype.removeEntity = function(ent) {
+
+};
+
+Level.prototype.update = function(elasped) {
+
+};
+
+Level.prototype.draw = function(ctx) {
+
+};
+
+

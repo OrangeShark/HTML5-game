@@ -1,4 +1,4 @@
-function TiledMap(mapUrl) {
+function TiledMap(mapUrl, viewRect) {
 
     this.currMapData = null;
     this.tilesets = [];
@@ -12,6 +12,7 @@ function TiledMap(mapUrl) {
         x: 64,
         y: 64
     };
+    this.viewRect = viewRect;
     this.imgLoadCount = 0;
     this.fullyLoaded = false;
 
@@ -105,6 +106,11 @@ TiledMap.prototype.draw = function(ctx) {
 
             var worldX = (tileIDX % this.numXTiles) * this.tileSize.x;
             var worldY = Math.floor( tileIDX / this.numXTiles ) * this.tileSize.y;
+
+            if ( (worldX - this.tileSize.x) < this.viewRect.x || (worldY + this.tileSize.y) < this.viewRect.y || worldX > this.viewRect.x + this.viewRect.w || worldY > this.viewRect.y + this.viewRect.h) continue;
+
+            worldX -= this.viewRect.x;
+            worldY -= this.viewRect.y;
 
             ctx.drawImage(tPKT.img, tPKT.px, tPKT.py, 
                     this.tileSize.x, this.tileSize.y, 
