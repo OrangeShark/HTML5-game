@@ -4,7 +4,6 @@ function GameEngine(canvas, scene) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
 
-
 }
 
 GameEngine.prototype.runGame = function() {
@@ -48,6 +47,7 @@ function Level(map, factory, input) {
     this.input = input;
     this.factory = factory;
     this.entities = [];
+    this.physics = new PhysicsEngine();
 }
 
 Level.prototype.spawnEntity = function(typeName) {
@@ -62,10 +62,16 @@ Level.prototype.removeEntity = function(ent) {
 
 Level.prototype.update = function(elasped) {
 
+    //update entities
+    
+    this.physics.update();
+
 };
 
 Level.prototype.draw = function(ctx) {
     this.map.draw(ctx);
+
+    //draw entities
 
 };
 
