@@ -48,6 +48,10 @@ function Level(map, factory, input) {
     this.factory = factory;
     this.entities = [];
     this.physics = new PhysicsEngine();
+    this.move_dir = new Vec2(0,0);
+    this.dirVec = new Vec2(0,0);
+    this.player = null;
+
 }
 
 Level.prototype.spawnEntity = function(typeName) {
@@ -63,6 +67,30 @@ Level.prototype.removeEntity = function(ent) {
 Level.prototype.update = function(elasped) {
 
     //update entities
+    if( this.input.actions['move-up'] ) {
+
+        this.move_dir.y = -1;
+    }
+
+    if( this.input.actions['move-down'] ) {
+
+        this.move_dir.y = 1;
+    }
+
+    if( this.input.actions['move-left'] ) {
+        this.move_dir.x = -1;
+    }
+
+    if( this.input.actions['move-right'] ) {
+        this.move_dir.x = 1;
+    }
+
+    if( this.move_dir.lengthSquared() ) {
+        this.move_dir.Normalize();
+        this.move_dir.Multiply(1);
+    }
+
+    this.player.physBody.setLinearVelocity(this.move_dir.x, this.move_dir.y);
     
     this.physics.update();
 
