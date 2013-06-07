@@ -1,5 +1,13 @@
+/*
+ * TiledMap object
+ * A TiledMap is a Tile set which can be used to draw the
+ * background of a game
+ * Constructor takes two parameters
+ * mapUrl: a string to the json map info
+ * viewRect: the viewing rectangle of the game
+ */
 function TiledMap(mapUrl, viewRect) {
-
+    // set up some default params
     this.currMapData = null;
     this.tilesets = [];
     this.numXTiles = 100;

@@ -1,11 +1,20 @@
+/*
+ * GameEngine is an object which contains the run loop for the game
+ * The constructor takes two parameters
+ * canvas object
+ * scene object
+ */
 function GameEngine(canvas, scene) {
 
-    this.currScene = scene;
+    this.currScene = scene;   // current scene/level
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
 
 }
 
+/*
+ * runGame is used to start the game and has the game loop
+ */
 GameEngine.prototype.runGame = function() {
     var frameId = 0;
     var lastFrame = Date.now();
@@ -14,12 +23,12 @@ GameEngine.prototype.runGame = function() {
     function run() {
         var thisFrame = Date.now();
 
-        var elasped = thisFrame -lastFrame;
+        var elasped = thisFrame - lastFrame;
 
         frameId = window.requestAnimationFrame(run);
 
         game.ctx.clearRect( 0, 0, game.canvas.width, game.canvas.height);
-
+        // update current scene and draw
         game.currScene.update(elasped);
         game.currScene.draw(game.ctx);
 
